@@ -1,0 +1,143 @@
+
+  <section class="pub-cham">
+    <div>
+      <article class="message is-dark">
+  <div class="message-body">
+
+      <h2>Publica tu chambita :P</h2>
+      <br>
+      <form action="/chambitas" method="post" enctype="multipart/form-data">
+        <textarea class="textarea" name="text" id="" rows="2" placeholder="¿Cómo es el trabajo?"></textarea>
+        
+        <br>
+        <br>
+        <div class="field">
+  <label class="label">Lugar de la chambita</label>
+  <div class="control">
+        <input class="input" type="text" name="location[address]" id="address">
+        </div>
+</div>
+
+        <p>
+        <input type="text" name="location.coordinates.lat" id="lat">
+
+
+
+      <p>
+        <input type="text" name="location.coordinates.lng" id="lng">
+      </p>
+
+        <br>
+        <div class="field">
+  <label class="label deque">¿De que es la chambita?</label>
+  <div class="control">
+    <div class="select seltip">
+        <select name="JobType">
+        <option value="Plomeria">Plomeria</option>
+        <option value="Pintor">Pintor</option>
+        <option value="Mecanico">Mecanico</option>
+        <option value="Carpintero">Carpintero</option>
+        <option value="Artista">Artista</option>
+        <option value="Chef">Chef</option>
+        <option value="Bartender">Bartender</option>
+        <option value="Desarrollador">Desarrollador</option>
+        <option value="Limpieza">Limpieza</option>
+        <option value="Fotografo">Fotografo</option>
+        <option value="Chofer">Chofer</option>
+        <option value="Mudanza">Mudanza</option>
+        <option value="Otro">Otro</option>
+        </select>
+        </div>
+  </div>
+</div>
+        <br>
+        <br>
+
+        
+        <div class="file">
+  <label class="file-label">
+          <input class="file-input" type="file" name="image">
+        <span class="file-cta">
+      <span class="file-icon">
+        <i class="fas fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Choose a file…
+      </span>
+    </span>
+  </label>
+</div>
+
+        <input class="button is-link" type="submit" value="postea la chamba">
+      </form>
+
+       </div>
+</article>
+    </div>
+  </section>
+
+  <br>
+  <br>
+  <br>
+
+
+
+         <section class="chambitas">
+      <strong>¿De que es la chambita?</strong>
+      <br>
+      <br>
+      {{#each chambitas}}
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <a href="/chambitas/detail/{{this._id}}"><img src="{{this.imageURL}}" alt="Ver la chambita"></a>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong><a href="/users/{{this.user.username}}">
+            {{this.user.username}}
+          </a></strong> <small>{{this.user.email}}</small> 
+          <br>
+          {{this.text}}        
+          </p>
+          <a href="/chambitas/like/{{this._id}}">
+            {{#if this.like}}
+            <button class="button is-link">Ya no quiero la chambita</button>
+            {{else}}
+            <button class="button is-link">Quiero esta chambita</button>
+            {{/if}}
+          </a>
+      </div>
+    </div>
+  </article>
+</div>
+ {{/each}}
+    </article>
+
+</section>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0iBJ86eZUGkhbuWhS7b4_B3-8cRYQgTQ&libraries=places"></script>
+
+<script>
+  let address = document.getElementById('address')
+  let lat = document.getElementById('lat')
+  let lng = document.getElementById('lng')
+
+  function autoComplete(input, inputLat, inputLng) {
+    const dropdown = new google.maps.places.Autocomplete(input)
+
+    dropdown.addListener('place_changed', () => {
+      let place = dropdown.getPlace()
+      console.log(place)
+      lat.value = place.geometry.location.lat()
+      lng.value = place.geometry.location.lng()
+    })
+  }
+  autoComplete(address, lat, lng)
+
+</script>

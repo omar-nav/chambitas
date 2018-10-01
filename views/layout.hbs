@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar is-dark">
+      <a href="/"><img src="https://res.cloudinary.com/davd4ynha/image/upload/v1538090927/logo.png" width="200px" style="background-color:rgb(244, 244, 231, 0.742)"></a>
+      {{#if user}}
+      <a href="/chambitas" class="">ver las chambitas</a>
+      <a href="/map" class="">el mapa</a>
+      <a href="/users/{{user.username}}" class="">mi perfil</a>
+      <a href="/logout" class="">cerrar sesion</a>
+      {{!-- <a href="/barChart" class="">gráfico de barras</a> --}}
+      {{else}}
+      <a href="/login" class="">iniciar sesión</a>
+      <a href="/signup" class="">regístrate</a>
+      {{/if}}
+    </nav>
+  </header>
+  {{{body}}}
+  <footer class="footer tam">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Chambitas express</strong> por <a href="">Omar</a> y <a href="">Joe</a> | Estudiantes de Ironhack.
+      </p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/script.js"></script>
+</body>
+
+</html>

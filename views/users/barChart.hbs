@@ -1,0 +1,93 @@
+{{#each users}}
+<h2>{{chambita}}</h2>
+{{/each}}
+<script type="text/javascript">
+  let chambitasType = [];
+  let chambitasStringLength = (document.getElementsByTagName('h2').length)
+  for (i = 0; i < chambitasStringLength; i++) {
+    let chambitasString = (document.getElementsByTagName('h2')[i].Text)
+    if (chambitasString[i].search('JobType: ') === -1) {
+      chambitasType.psh("")
+    } else {
+      chambitasType.push(chambitasStringArray[i])
+      for (i = 0; i < chambitasStringArray.length; i++) {
+        let chambitasStringArray = chambitasString.split('JobType: ')
+        chambitasStringArray.shift();
+      }
+    }
+  }
+  console.log(chambitasType)
+
+  //find frequency of each category
+  let chambitasFrequency = []
+  let plomeriaFrequency = 0
+  let pintorFrequency = 0
+  let mecanicoFrequency = 0
+  let carpinteroFrequency = 0
+  let artistaFrequency = 0
+  let chefFrequency = 0
+  let bartenderFrequency = 0
+  let desarrolladorFrequency = 0
+  let limpiezaFrequency = 0
+  let fotografoFrequency = 0
+  let choferFrequency = 0
+  let mudanzaFrequency = 0
+  let otroFrequency = 0
+
+  for (i = 0; i < chambitasType.length; i++) {
+    if (chambitasType[i].startsWith("'Plomeria")) {
+      plomeriaFrequency++
+    }
+    if (chambitasType[i].startsWith("'Pintor")) {
+      pintorFrequency++
+    }
+    if (chambitasType[i].startsWith("'Mecanico")) {
+      mecanicoFrequency++
+    }
+    if (chambitasType[i].startsWith("'Carpintero")) {
+      carpinteroFrequency++
+    }
+    if (chambitasType[i].startsWith("'Artista")) {
+      artistaFrequency++
+    }
+    if (chambitasType[i].startsWith("'Chef")) {
+      chefFrequency++
+    }
+    if (chambitasType[i].startsWith("'Bartender")) {
+      bartenderFrequency++
+    }
+    if (chambitasType[i].startsWith("'Desarrollador")) {
+      desarrolladorFrequency++
+    }
+    if (chambitasType[i].startsWith("'Limpieza")) {
+      limpiezaFrequency++
+    }
+    if (chambitasType[i].startsWith("'Fotografo")) {
+      fotografoFrequency++
+    }
+    if (chambitasType[i].startsWith("'Chofer")) {
+      choferFrequency++
+    }
+    if (chambitasType[i].startsWith("'Mudanza")) {
+      mudanzaFrequency++
+    }
+    if (chambitasType[i].startsWith("'Otro")) {
+      otroFrequency++
+    }
+  }
+  chambitasFrequency.push(plomeriaFrequency)
+  chambitasFrequency.push(mecanicoFrequency)
+  chambitasFrequency.push(pintorFrequency)
+  chambitasFrequency.push(carpinteroFrequency)
+  chambitasFrequency.push(artistaFrequency)
+  chambitasFrequency.push(chefFrequency)
+  chambitasFrequency.push(bartenderFrequency)
+  chambitasFrequency.push(desarrolladorFrequency)
+  chambitasFrequency.push(limpiezaFrequency)
+  chambitasFrequency.push(fotografoFrequency)
+  chambitasFrequency.push(choferFrequency)
+  chambitasFrequency.push(mudanzaFrequency)
+  chambitasFrequency.push(otroFrequency)
+
+
+</script>

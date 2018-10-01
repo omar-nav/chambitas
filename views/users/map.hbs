@@ -1,0 +1,170 @@
+<div id="map" style="width: 190vh; height: 85vh;"></div>
+
+{{#each users}}
+
+<h2 class="mapData">{{chambita}}</h2>
+<h1 class="mapData">{{username}}</h1>
+<p class="mapData">{{location.address}}</p>
+<h5 class="mapData">{{location.coordinates.lat}}</h5>
+<h6 class="mapData">{{location.coordinates.lng}}</h6>
+<h4 class="mapData">{{type}}</h4>
+{{/each}}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeuv5OUrNW0X9zonL9ldzdjgFR9KtRwM8"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  let latitudesLength = $('h5').length;
+  let latitudesObject = $('h5');
+  let latitudes = [];
+  for (i = 0; i < latitudesLength; i++) {
+    latitudes.push(latitudesObject[i].innerHTML)
+  }
+  let longitudesLength = $('h6').length;
+  let longitudesObject = $('h6');
+  let longitudes = [];
+  for (i = 0; i < longitudesLength; i++) {
+    longitudes.push(longitudesObject[i].innerHTML)
+  }
+  let typeLength = $('h4').length;
+  let typeObject = $('h4');
+  let types = [];
+  for (i = 0; i < typeLength; i++) {
+    types.push(typeObject[i].innerHTML)
+  }
+
+  let locations = []
+
+  for (i = 0; i < typeLength; i++) {
+    let type = types[i];
+    let x = latitudes[i];
+    let y = longitudes[i];
+    locations.push([type, x, y])
+  }
+  let chambitasLength = $('h2').length;
+  let chambitasType = [];
+  let chambitasLat = [];
+  let chambitasLong = [];
+  for (i = 0; i < chambitasLength; i++) {
+    let chambitasString = $('h2')[i].innerHTML;
+    chambitasString = chambitasString.split(' ');
+    if (chambitasString[9] === undefined) {
+      chambitasLat.push("")
+    } else {
+      chambitasLat.push(chambitasString[9].replace(',', ''));
+    } if (chambitasString[11] === undefined) {
+      chambitasLong.push("")
+    } else {
+      chambitasLong.push(chambitasString[11].replace(',', ''));
+    }
+  }
+  for (i = 0; i < chambitasLength; i++) {
+    let chambitasString = document.getElementsByTagName('h2')[i].innerHTML
+    var searchTerm = "JobType: '";
+    var startIndex = chambitasString.indexOf(searchTerm);
+    startIndex += "JobType: '".length
+    var shortCategory = chambitasString.substring(startIndex, startIndex + 4);
+    console.log(shortCategory)
+    if (shortCategory.startsWith("Plom")) {
+      shortCategory = shortCategory + 'eria'
+    }
+    if (shortCategory.startsWith("Pint")) {
+      shortCategory = shortCategory + 'or'
+    }
+    if (shortCategory.startsWith("Meca")) {
+      shortCategory = shortCategory + 'nico'
+    }
+    if (shortCategory.startsWith("Carp")) {
+      shortCategory = shortCategory + 'intero'
+    }
+    if (shortCategory.startsWith("Arti")) {
+      shortCategory = shortCategory + 'sta'
+    }
+    if (shortCategory.startsWith("Chef")) {
+      shortCategory = shortCategory
+    }
+    if (shortCategory.startsWith("Bart")) {
+      shortCategory = shortCategory + 'ender'
+    }
+    if (shortCategory.startsWith("Desa")) {
+      shortCategory = shortCategory + 'rrollador'
+    }
+    if (shortCategory.startsWith("Limp")) {
+      shortCategory = shortCategory + 'ieza'
+    }
+    if (shortCategory.startsWith("Foto")) {
+      shortCategory = shortCategory + 'grafo'
+    }
+    if (shortCategory.startsWith("Chof")) {
+      shortCategory = shortCategory + 'er'
+    }
+    if (shortCategory.startsWith("Muda")) {
+      shortCategory = shortCategory + 'nza'
+    }
+    if (shortCategory.startsWith("Otro")) {
+      shortCategory = shortCategory
+    }
+    chambitasType.push(shortCategory);
+  }
+  for (i = 0; i < chambitasLength; i++) {
+    let type = chambitasType[i];
+    let x = chambitasLat[i];
+    let y = chambitasLong[i];
+    locations.push([type, x, y])
+  }
+
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: new google.maps.LatLng(19.397760, -99.171388),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  var infowindow = new google.maps.InfoWindow();
+  var marker, i;
+  var worker = {
+    url: 'http://res.cloudinary.com/davd4ynha/image/upload/c_scale,h_33/v1537914040/employee.png'
+  };
+  var boss = {
+    url: 'https://res.cloudinary.com/davd4ynha/image/upload/c_scale,h_33/v1537916568/boss.png'
+  }
+  var dot = {
+    url: 'https://res.cloudinary.com/davd4ynha/image/upload/c_scale,h_11/v1538024637/purpleDot.png'
+  }
+  for (i = 0; i < locations.length; i++) {
+    if (locations[i][0] !== 'employer' && locations[i][0] !== 'employee') {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: dot
+      });
+    }
+    if (locations[i][0] === 'employee') {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: worker
+      });
+    } if (locations[i][0] === 'employer') {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: boss
+      });
+    }
+    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      return function () {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+  }
+  setTimeout(function () {
+    $("h1").remove();
+    $("p").remove();
+    $("h5").remove();
+    $("h6").remove();
+    $("h4").remove();
+    $("p").remove();
+    $("h2").remove();
+  }, 0);
+</script>

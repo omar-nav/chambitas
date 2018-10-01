@@ -1,0 +1,107 @@
+<section class="auth">
+
+  <article class="message is-dark">
+  <div class="message-body">
+ <p>{{error}}</p>
+
+    <h1>Registrate :B</h1>
+    <form action="/signup" method="post">
+
+      <div class="field">
+  <label class="label">Email</label>
+  <div class="control has-icons-left has-icons-right">
+        <input class="input is-success" type="email" name="email" id="" value="{{data.email}}">
+        <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+     </div>
+</div>
+
+      <div class="field">
+  <label class="label">Username</label>
+  <div class="control has-icons-left has-icons-right">
+        <input class="input is-success" type="text" name="username" id="" value="{{data.username}}">
+       <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+  </div>
+  <p class="help is-success">This username is available</p>
+</div>
+
+      <div class="field">
+  <label class="label">Direccion</label>
+  <div class="control">
+        <input class="input" type="text" name="location.address" id="address">
+      </div>
+</div>
+
+
+      <p>
+        <input class="input" type="text" name="location.coordinates.lat" id="lat">
+      </p>
+
+      <p>
+        <input class="input" type="text" name="location.coordinates.lng" id="lng">
+      </p><br>
+      <br>
+
+
+      <div class="field">
+  <label class="label">¿Que eres?</label>
+  <div class="control">
+    <div class="select">
+      <select name="type">
+        <option value="employer">Empleador</option>
+        <option value="employee">Trabajador</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+      <div class="field">
+  <label class="label">Contraseña</label>
+  <div class="control">
+        <input class="input" type="password" name="password" id="" value="{{data.password}}">
+      </div>
+</div>
+
+      <div class="field is-grouped">
+  <div class="control">
+        <input class="button is-link" type="submit" value="Registrate">
+      </div>
+</div>
+
+
+    </form>
+
+    
+
+     <br>
+     <br>
+
+    <p>Si ya tienes cuenta <a href="/login">Dale 😏</a></p>
+  </div>
+</article>
+
+
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0iBJ86eZUGkhbuWhS7b4_B3-8cRYQgTQ&libraries=places"></script>
+
+<script>
+  let address = document.getElementById('address')
+  let lat = document.getElementById('lat')
+  let lng = document.getElementById('lng')
+  function autoComplete(input, inputLat, inputLng) {
+    const dropdown = new google.maps.places.Autocomplete(input)
+    dropdown.addListener('place_changed', () => {
+      let place = dropdown.getPlace()
+      console.log(place)
+      lat.value = place.geometry.location.lat()
+      lng.value = place.geometry.location.lng()
+    })
+  }
+  autoComplete(address, lat, lng)
+</script>
+
+

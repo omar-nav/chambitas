@@ -1,0 +1,41 @@
+<section class="auth">
+  <article class="message is-dark">
+  <div class="message-body">
+  <div>
+    <p>{{error}}</p>
+    <h1>Iniciar sesión</h1>
+    <form action="/login" method="post">
+
+<br><br>
+      <div class="field">
+  <label class="label">Username</label>
+  <div class="control has-icons-left has-icons-right">
+        <input class="input is-success" type="username" name="username" id="" value="{{data.email.username}}">
+      <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+  </div>
+</div>
+
+      
+      <div class="field">
+  <label class="label">Contraseña</label>
+  <div class="control">
+        <input class="input" type="password" name="password" id="" value="{{data.password}}">
+       </div>
+</div>
+
+
+      <div class="field is-grouped">
+  <div class="control">
+        <input class="button is-link" type="submit" value="iniciar sesión">
+      </div>
+</div>
+
+    </form>
+    <br><br>
+    <p>No tienes cuenta? <a href="/signup">puchale para crearla</a></p>
+  </div>
+  </div>
+  </article>
+</section>

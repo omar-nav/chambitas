@@ -1,0 +1,58 @@
+ <section class="detalle-chambita">
+    {{#if owner}}
+    <div class="card">
+      <img src="{{chambita.imageURL}}" width="300px" alt="">
+      <p class="chambitaHeader">{{chambita.text}}</p>
+    </div>
+    <form action="/chambitas/detail/{{chambita._id}}" method="chambita" enctype="multipart/form-data">
+    </form>
+    <div class="column">
+      <a href="/chambitas/delete/{{chambita._id}}"></a>
+    </div>
+    {{else}}
+     <div class="card">
+      <img src="{{chambita.imageURL}}" alt="">
+      <p class="chambitaHeader">{{chambita.text}}</p>
+    </div>
+    {{/if}}
+
+  <div class="columnsGroup">
+    <div class="column">
+      <article>
+        <h2>Comenta la chambita</h2>
+        <form action="/chambitas/detail/{{chambita._id}}/comments" method="post">
+          <textarea class="textarea" name="text" id="" rows="5" placeholder="Comenta sobre esta chambita"></textarea>
+          <input class="button is-link" type="submit" value="comentar">
+    </form>
+  </article>
+  </div>
+  </div>
+   </section>
+  
+  <br>
+  <br>
+
+ <section>
+    <article class="media">
+    {{#each comments}}
+    <figure class="media-left">
+      <p class="image is-128x128">
+        <img src="{{data.photoURL}}" alt="">
+      </p>
+    </figure>
+    <div class="media-content columna ">
+      <div class="content">
+        <p>
+          <strong><a href="/users/{{this.user.username}}">
+              {{this.user.username}}
+            </a></strong> | <small>{{this.user.email}}</small>
+          <br>
+          <br>
+          <br>
+          {{this.text}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+  </article>
+ </section>
